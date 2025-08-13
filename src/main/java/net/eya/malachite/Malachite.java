@@ -1,6 +1,7 @@
 package net.eya.malachite;
 
 import net.eya.malachite.effect.ModEffects;
+import net.eya.malachite.item.ModItems;
 import net.eya.malachite.potion.ModPotions;
 import net.fabricmc.api.ModInitializer;
 
@@ -17,9 +18,7 @@ public class Malachite implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
+		ModItems.registerModItems();
 		ModEffects.registerEffects();
 		ModPotions.registerPotions();
 		LOGGER.info("Hello Fabric world!");
