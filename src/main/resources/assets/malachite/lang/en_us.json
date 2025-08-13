@@ -1,0 +1,12 @@
+{
+  "item.malachite.malachite": "Malachite",
+  "effect.malachite.magic_resistance": "Magic Resistance",
+  "item.minecraft.potion.effect.magic_resistance": "Potion of Magic Resistance",
+  "item.minecraft.potion.effect.long_magic_resistance": "Potion of Magic Resistance",
+  "item.minecraft.splash_potion.effect.magic_resistance": "Splash Potion of Magic Resistance",
+  "item.minecraft.splash_potion.effect.long_magic_resistance": "Splash Potion of Magic Resistance",
+  "item.minecraft.lingering_potion.effect.magic_resistance": "Lingering Potion of Magic Resistance",
+  "item.minecraft.lingering_potion.effect.long_magic_resistance": "Lingering Potion of Magic Resistance",
+  "item.minecraft.tipped_arrow.effect.magic_resistance": "Arrow of Magic Resistance",
+  "item.minecraft.tipped_arrow.effect.long_magic_resistance": "Arrow of Magic Resistance"
+}
