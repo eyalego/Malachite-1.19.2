@@ -7,7 +7,7 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 
 import java.util.UUID;
 
-public class MagicResistanceEffect extends StatusEffect {
+public class    MagicResistanceEffect extends StatusEffect {
     public MagicResistanceEffect() {
         super(StatusEffectCategory.BENEFICIAL, 0x38624b);
     }
