@@ -26,7 +26,7 @@
 		"malachite.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.17.2",
+		"fabricloader": ">=0.16.14",
 		"minecraft": "~1.19.2",
 		"java": ">=17",
 		"fabric-api": "*"
