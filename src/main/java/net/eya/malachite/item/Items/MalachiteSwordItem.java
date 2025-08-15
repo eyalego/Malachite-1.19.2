@@ -1,5 +1,7 @@
 package net.eya.malachite.item.Items;
 
+import net.eya.malachite.entity.ModEntities;
+import net.eya.malachite.entity.custom.MagicMissileEntity;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -46,7 +48,7 @@ public class MalachiteSwordItem extends SwordItem {
 
         if (!world.isClient) {
             if (charge >= MAX_CHARGE) {
-                EnderPearlEntity projectile = new EnderPearlEntity(world, user);
+                MagicMissileEntity projectile = new MagicMissileEntity(ModEntities.MAGIC_MISSILE, world);
                 projectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
                 world.spawnEntity(projectile);
 

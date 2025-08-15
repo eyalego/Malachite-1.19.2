@@ -1,6 +1,7 @@
 package net.eya.malachite;
 
 import net.eya.malachite.effect.ModEffects;
+import net.eya.malachite.entity.ModEntities;
 import net.eya.malachite.item.ModItems;
 import net.eya.malachite.potion.ModPotions;
 import net.fabricmc.api.ModInitializer;
@@ -21,6 +22,7 @@ public class Malachite implements ModInitializer {
 		ModItems.registerModItems();
 		ModEffects.registerEffects();
 		ModPotions.registerPotions();
+		ModEntities.register();
 		LOGGER.info("Hello Fabric world!");
 	}
 }
