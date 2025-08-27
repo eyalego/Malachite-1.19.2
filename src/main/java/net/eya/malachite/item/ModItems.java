@@ -15,9 +15,9 @@ public class ModItems {
     public static final Item MALACHITE = registerItem("malachite",
             new Item(new FabricItemSettings().group(ItemGroup.MISC)));
 
-    public static final Item MALACHITE_SWORD = registerItem("malachite_sword",
-            new MalachiteSwordItem(ToolMaterials.DIAMOND, 5, -3.5f,
-                    new FabricItemSettings().group(ItemGroup.COMBAT)));
+    public static final Item MALACHITE_LONGSWORD = registerItem("malachite_longsword",
+            new MalachiteSwordItem(ToolMaterials.DIAMOND, 5, -2.9f,
+                    new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).fireproof()));
 
 
     private static Item registerItem(String name, Item CamaraOfTheOtherSideItem) {

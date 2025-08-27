@@ -1,64 +1,79 @@
 package net.eya.malachite.item.Items;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.eya.malachite.damage.ModDamage;
+import net.eya.malachite.effect.ModEffects;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.FireballEntity;
-import net.minecraft.entity.projectile.thrown.EnderPearlEntity;
-import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
-import net.minecraft.item.ToolMaterials;
+import net.minecraft.item.TridentItem;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.text.Text;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.UseAction;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class MalachiteSwordItem extends SwordItem {
-    private static final int MAX_CHARGE = 10;
+import java.util.List;
 
+public class MalachiteSwordItem extends SwordItem {
     public MalachiteSwordItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
+    }
+    private static final String CHARGE_KEY = "Charge";
+    private static final int MAX_CHARGE = 5;
 
-        }
+
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (!attacker.getWorld().isClient) {
-            NbtCompound nbt = stack.getOrCreateNbt();
-            int charge = nbt.getInt("charge");
-
-            if (charge < MAX_CHARGE) {
-                nbt.putInt("charge", charge + 1);
-            }
+        NbtCompound nbt = stack.getOrCreateNbt();
+        int charge = nbt.getInt(CHARGE_KEY);
+        if (charge < MAX_CHARGE) {
+            nbt.putInt(CHARGE_KEY, charge + 1);
         }
-
         return super.postHit(stack, target, attacker);
     }
 
+    @Override
+    public UseAction getUseAction(ItemStack stack) {
+        assert stack.getNbt() != null;
+        int charge = stack.getNbt().getInt(CHARGE_KEY);
+        if (charge == MAX_CHARGE) {
+            return UseAction.SPEAR;
+        } else {
+            return null;
+        }
+    }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        ItemStack stack = user.getStackInHand(hand);
-        NbtCompound nbt = stack.getOrCreateNbt();
-        int charge = nbt.getInt("charge");
+    public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
+        if (!(user instanceof PlayerEntity playerEntity)) return;
 
-        if (!world.isClient) {
-            if (charge >= MAX_CHARGE) {
-                EnderPearlEntity projectile = new EnderPearlEntity(world, user);
-                projectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
-                world.spawnEntity(projectile);
+        int i = this.getMaxUseTime(stack) - remainingUseTicks;
+        if (i < 10) return;
 
+        float f = playerEntity.getYaw();
+        float g = playerEntity.getPitch();
+        float h = -MathHelper.sin(f * ((float) Math.PI / 180.0F)) * MathHelper.cos(g * ((float) Math.PI / 180.0F));
+        float k = -MathHelper.sin(g * ((float) Math.PI / 180.0F));
+        float l = MathHelper.cos(f * ((float) Math.PI / 180.0F)) * MathHelper.cos(g * ((float) Math.PI / 180.0F));
+        float m = MathHelper.sqrt(h * h + k * k + l * l);
+        float n = 3.0F * ((1.0F * 2) / 4.0F);
+        h = n / m;
+        k= n / m;
+        l *= n / m;
 
-                nbt.putInt("charge", 0);
-            }
-            }
-
-        return TypedActionResult.success(stack, world.isClient());
+        playerEntity.addVelocity(h, k, l);
+        playerEntity.useRiptide(15);
+        super.onStoppedUsing(stack, world, user, remainingUseTicks);
     }
 }
-
 
 
 

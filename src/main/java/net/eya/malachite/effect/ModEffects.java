@@ -7,8 +7,10 @@ import net.minecraft.util.registry.Registry;
 
 public class ModEffects {
     public static final StatusEffect MAGIC_RESISTANCE = new MagicResistanceEffect();
+    public static final StatusEffect OVERCHARGED = new OverchargedEffect();
 
     public static void registerEffects() {
         Registry.register(Registry.STATUS_EFFECT, new Identifier(Malachite.MOD_ID, "magic_resistance"), MAGIC_RESISTANCE);
+        Registry.register(Registry.STATUS_EFFECT, new Identifier(Malachite.MOD_ID, "overcharged"), OVERCHARGED);
     }
 }

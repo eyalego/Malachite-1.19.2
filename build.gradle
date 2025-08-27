@@ -35,7 +35,7 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-//	modImplementation "com.lowdragmc.photon-mc1.19.2-1.0.7.a-fabric"
+	implementation "org.reflections:reflections:0.10.2"
 
 
 }

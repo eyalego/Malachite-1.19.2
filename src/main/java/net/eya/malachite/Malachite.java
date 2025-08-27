@@ -5,6 +5,7 @@ import net.eya.malachite.item.ModItems;
 import net.eya.malachite.potion.ModPotions;
 import net.fabricmc.api.ModInitializer;
 
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +22,10 @@ public class Malachite implements ModInitializer {
 		ModItems.registerModItems();
 		ModEffects.registerEffects();
 		ModPotions.registerPotions();
-		LOGGER.info("Hello Fabric world!");
+		LOGGER.info("Fox you suck at coding.");
+	}
+
+	public static Identifier id(String name) {
+		return Identifier.of(MOD_ID, name);
 	}
 }

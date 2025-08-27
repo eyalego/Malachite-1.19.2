@@ -5,7 +5,13 @@
 	"mixins": [
 		"ExampleMixin",
 		"BrewingRecipeRegistryMixin",
-		"MagicResistanceMixin"
+		"MagicResistanceMixin",
+		"LivingEntityMixin",
+		"client.BipedEntityModelMixin",
+		"client.ItemRendererAccessor",
+		"client.ItemRendererMixin",
+		"client.ModelLoaderMixin",
+		"client.PlayerEntityRendererMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
