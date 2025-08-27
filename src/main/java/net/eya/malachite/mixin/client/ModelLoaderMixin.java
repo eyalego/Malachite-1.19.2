@@ -24,8 +24,8 @@ public abstract class ModelLoaderMixin {
     protected abstract void addModel(ModelIdentifier modelId);
     @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/model/ModelLoader;addModel(Lnet/minecraft/client/util/ModelIdentifier;)V", ordinal = 3, shift = At.Shift.AFTER))
     public void addLongSword(ResourceManager resourceManager, BlockColors blockColors, Profiler profiler, int i, CallbackInfo ci) {
-        this.addModel(new ModelIdentifier(Malachite.id("malachite_longsword_icon"), "inventory"));
-        this.addModel(new ModelIdentifier(Malachite.id("malachite_longsword_charged"), "inventory"));
-        this.addModel(new ModelIdentifier(Malachite.id("malachite_longsword_charged_icon"), "inventory"));
+        this.addModel(new ModelIdentifier(Malachite.id("malachite_longsword_alt"), "inventory"));
+        this.addModel(new ModelIdentifier(Malachite.id("malachite_longsword_charged_alt"), "inventory"));
+        this.addModel(new ModelIdentifier(Malachite.id("malachite_longsword_charged_alt"),"gui"));
     }
 }

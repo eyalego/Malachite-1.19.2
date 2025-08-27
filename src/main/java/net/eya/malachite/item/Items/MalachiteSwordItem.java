@@ -2,6 +2,7 @@ package net.eya.malachite.item.Items;
 
 import net.eya.malachite.damage.ModDamage;
 import net.eya.malachite.effect.ModEffects;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
@@ -52,6 +53,22 @@ public class MalachiteSwordItem extends SwordItem {
     }
 
     @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        ItemStack stack = user.getStackInHand(hand);
+        NbtCompound nbt = stack.getOrCreateNbt();
+        int charge = nbt.getInt(CHARGE_KEY);
+        //Basic use check for the riptide action
+        //You probably only want to riptide when you are max charged, hopefully
+        if (charge >= MAX_CHARGE){
+            user.setCurrentHand(hand);
+            return TypedActionResult.success(stack);
+
+        } else{
+            return TypedActionResult.pass(stack);
+        }
+    }
+
+    @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         if (!(user instanceof PlayerEntity playerEntity)) return;
 
@@ -69,9 +86,31 @@ public class MalachiteSwordItem extends SwordItem {
         k= n / m;
         l *= n / m;
 
+        //Was this riptide meant to be backwards?
         playerEntity.addVelocity(h, k, l);
         playerEntity.useRiptide(15);
+
+        //Reset the Charge meter Remove if you don't want it to work this way,
+        //But it was easier to test if the textures are working correctly
+        NbtCompound nbt = stack.getOrCreateNbt();
+        nbt.putInt(CHARGE_KEY, 0);
         super.onStoppedUsing(stack, world, user, remainingUseTicks);
+    }
+
+
+    //Is there a better way to do this? Yes. Is this a good enough way to do it? Yes
+    @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+        if (!world.isClient || !(entity instanceof PlayerEntity player)) return;
+
+        NbtCompound nbt = stack.getOrCreateNbt();
+        int charges = nbt.getInt("Charge");
+
+        int expectedModel = charges >= 5 ? 1 : 0;
+
+        if (nbt.getInt("CustomModelData") != expectedModel) {
+            nbt.putInt("CustomModelData", expectedModel);
+        }
     }
 }
 

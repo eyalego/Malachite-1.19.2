@@ -1,37 +1,6 @@
 {
-  "format_version": "1.9.0",
-  "credit": "Made with Blockbench",
   "parent": "item/generated",
   "textures": {
-    "layer0": "malachite:item/malachite_longsword_charged"
-  },
-  "display": {
-    "thirdperson_righthand": {
-      "rotation": [44.25, 90, 0],
-      "translation": [0, 16, 0.25],
-      "scale": [2, 2, 1]
-    },
-    "thirdperson_lefthand": {
-      "rotation": [44.25, -90, 0],
-      "translation": [0, 16, 0.25],
-      "scale": [2, 2, 1]
-    },
-    "firstperson_righthand": {
-      "rotation": [44.25, 90, 0],
-      "translation": [0, 10.75, 0.25],
-      "scale": [1.75, 1.75, 1]
-    },
-    "firstperson_lefthand": {
-      "rotation": [44.25, -90, 0],
-      "translation": [0, 10.75, 0.25],
-      "scale": [1.75, 1.75, 1]
-    },
-    "ground": {
-      "translation": [2.75, 5.25, 0],
-      "scale": [1.5, 1.5, 1]
-    },
-    "fixed": {
-      "translation": [1.75, 1.75, 0]
-    }
+    "layer0": "malachite:item/malachite_longsword_charged_icon"
   }
 }
